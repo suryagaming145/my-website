@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Air Quality Monitoring Dashboard</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <div class="container-fluid p-4">
+
+        <!-- ================= HEADER ================= -->
+
+        <div class="row mb-4 align-items-center">
+
+            <div class="col-lg-8">
+
+                <h1 class="dashboard-title">
+                    🌍 Air Quality Monitoring Dashboard
+                </h1>
+
+                <p class="dashboard-subtitle">
+                    ESP32 | DHT11 | MQ135 | Node.js | Live Monitoring
+                </p>
+
+            </div>
+
+            <div class="col-lg-4 text-end">
+
+                <div class="online-box">
+
+                    <span class="online-dot"></span>
+
+                    <span>ONLINE</span>
+
+                    <br>
+
+                    <small id="liveTime">--:--:--</small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ================= SENSOR CARDS ================= -->
+
+        <div class="row g-4">
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="sensor-card">
+
+                    <i class="bi bi-thermometer-half sensor-icon temp-icon"></i>
+
+                    <h6>Temperature</h6>
+
+                    <h2 id="temperature">--</h2>
+
+                    <span>°C</span>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="sensor-card">
+
+                    <i class="bi bi-droplet-fill sensor-icon humidity-icon"></i>
+
+                    <h6>Humidity</h6>
+
+                    <h2 id="humidity">--</h2>
+
+                    <span>%</span>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="sensor-card">
+
+                    <i class="bi bi-wind sensor-icon aqi-icon"></i>
+
+                    <h6>Air Quality Index</h6>
+
+                    <h2 id="aqi">--</h2>
+
+                    <span>AQI</span>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="sensor-card">
+
+                    <i class="bi bi-shield-check sensor-icon status-icon"></i>
+
+                    <h6>Air Status</h6>
+
+                    <h2 id="status">Waiting...</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ================= CHARTS ================= -->
+
+        <div class="row mt-4">
+
+            <div class="col-lg-6 mb-4">
+
+                <div class="chart-card">
+
+                    <h5>🌡 Temperature Trend</h5>
+
+                    <canvas id="tempChart"></canvas>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-6 mb-4">
+
+                <div class="chart-card">
+
+                    <h5>💧 Humidity Trend</h5>
+
+                    <canvas id="humidityChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-8">
+
+                <div class="chart-card">
+
+                    <h5>🌫 AQI History</h5>
+
+                    <canvas id="aqiChart"></canvas>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <div class="gauge-card">
+
+                    <h4>Air Quality Status</h4>
+
+                    <div id="gaugeCircle">
+
+                        <div id="gaugeValue">--</div>
+
+                    </div>
+
+                    <h3 id="gaugeText">Waiting...</h3>
+
+                    <hr>
+
+                    <div class="info-box">
+
+                        <p>
+                            <i class="bi bi-wifi"></i>
+                            ESP32 Connected
+                        </p>
+
+                        <p>
+                            <i class="bi bi-clock-history"></i>
+                            Last Update
+                        </p>
+
+                        <h6 id="lastUpdate">--:--:--</h6>
+
+                    </div>
+
+                    <button id="downloadCSV" class="btn btn-primary w-100 mt-3">
+
+                        <i class="bi bi-download"></i>
+
+                        Download CSV
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ================= FOOTER ================= -->
+
+        <footer class="mt-5 text-center">
+
+            <hr>
+
+            <p>
+
+                Developed By
+
+                <strong>Subha Sarkar</strong>
+
+                <br>
+
+                B.Tech Electrical Engineering
+
+                <br>
+
+                Air Quality Monitoring System
+
+            </p>
+
+        </footer>
+
+    </div>
+
+    <!-- ================= SCRIPT ================= -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
